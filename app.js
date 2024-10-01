@@ -28,12 +28,16 @@ app.use(express.urlencoded({
 }));
 
 indexRouter = require('./router/home');
-boardRouter = require('./router/board');
+gpsViewRouter = require('./router/gpsView');
 memberRouter = require('./router/member');
 
+pharmacyRouter = require('./router/pharmacy');
+
 app.use('/', indexRouter);
-app.use('/board', boardRouter);
+app.use('/gps', gpsViewRouter);
 app.use('/member', memberRouter);
+
+app.use('/pharmacy', pharmacyRouter);
 
 
 //nunjucks

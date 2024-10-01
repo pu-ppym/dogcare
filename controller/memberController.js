@@ -2,9 +2,9 @@ const model = require('../model/memberModel');
 
 const common = require('../common/common');
 
-const list = ((req, res) => {
+const signup = ((req, res) => {
     try {
-        res.render('member/list');
+        res.render('member/signup');
     } catch (error) {
         res.status(500).send('500 Error: ' + error);
     }
@@ -45,7 +45,7 @@ const loginProc = ((req, res) => {
 });
 
 module.exports = {
-    list,
+    signup,
     login,
     loginProc
 };
