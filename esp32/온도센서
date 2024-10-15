@@ -13,15 +13,15 @@ void setup() {
     while(1);
   };
 
-  Serial.print("방사율 : "); Serial.println(mlx.readEmissivity());
+  Serial.print("방사율 : "); Serial.println(mix.readEmissivity());
   Serial.println("===============================================");
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   Serial.print("주변 온도 : ");
-  Serial.print(mlx.readAmbientTempc()));
+  Serial.print(mix.readAmbientTempC());
   Serial.print("물체 온도 : ");
-  Serial.print(mlx.readObjectTempc());
+  Serial.print(mix.readObjectTempC());
   delay(500);
 }
