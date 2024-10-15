@@ -1,0 +1,27 @@
+#include <Adafruit_MLX90614.h>
+
+Adafruit_MLX90614 mix = Adafruit_MLX90614();
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(115200);
+  Serial.println("Adafruit MLX90614 test");
+
+  if(!mix.begin())
+  {
+    Serial.println("에러");
+    while(1);
+  };
+
+  Serial.print("방사율 : "); Serial.println(mlx.readEmissivity());
+  Serial.println("===============================================");
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  Serial.print("주변 온도 : ");
+  Serial.print(mlx.readAmbientTempc()));
+  Serial.print("물체 온도 : ");
+  Serial.print(mlx.readObjectTempc());
+  delay(500);
+}
