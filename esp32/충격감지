@@ -1,11 +1,20 @@
 void setup() {
-  pinMode(7, INPUT); // 핀 7을 입력 모드로 설정
-  Serial.begin(115200); // 시리얼 통신 시작
+  Serial.begin(115200);  // ESP32에서 일반적으로 사용하는 속도
 }
 
 void loop() {
-  if (digitalRead(7)) { // 핀 7에서 값 읽기
-    Serial.println("충격감지"); // 충격 감지 시 메시지 출력
-    delay(500); // 0.5초 지연
+  int sensor = analogRead(A7);  // A7 핀에서 센서 값 읽기
+
+  // 네 자리 숫자로 포맷
+  String sensorValue = String(sensor);
+  while (sensorValue.length() < 4) {
+    sensorValue = "0" + sensorValue;  // 길이가 4보다 작을 경우 앞에 0 추가
   }
+
+  // 센서 값 출력
+  Serial.print("센서 값: ");
+  Serial.println(sensorValue);  // 네 자리로 포맷된 센서 값 출력
+  
+  // 500ms 대기
+  delay(500);
 }
