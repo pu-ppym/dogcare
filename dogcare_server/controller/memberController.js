@@ -1,5 +1,4 @@
 const model = require('../model/memberModel');
-
 const common = require('../common/common');
 
 const signup = ((req, res) => {
@@ -18,23 +17,32 @@ const login = ((req, res) => {
     }
 });
 
-const loginProc = ((req, res) => {
+
+// 로그인 post
+const loginProc = (async(req, res) => {
     try {
-        let {user_id, user_pw} = req.body; // 알아서 매핑해줌?
+        let {user_id, user_pw} = req.body; 
         //console.log(user_id);
         //console.log(user_pw);
-        if(user_id == 'jio' && user_pw == '1234') {
+        
+        // XSS 방지 -> 엄격하게
+        user_id = common.reqeustFilter(user_id, 20, false);
+        user_pw = common.reqeustFilter(user_pw, 20, false);
+
+
+        const result = await model.loginCheck(user_id, user_pw);
+        console.log(`db에서 넘어오는 로그인정보: ${result}`)
+
+        if(result != null) {
             // 로그인 ok
             req.session.user = {
-                pkid: '1',
-                user_id: 'jio',
-                user_name: '지오'
+                pkid: result.pkid,  
+                user_id: result.user_id
             }
-            res.send('<script>alert("로그인 되었습니다."); location.href="/"; </script>');
-            res.end();
+
+            common.alertAndGo(res, "로그인 되었습니다.", "/")
         } else {
-            res.send('<script>alert("아이디 또는 비밀번호가 틀립니다."); location.href="/member/login"; </script>');
-            res.end();
+            common.alertAndGo(res, "아이디 또는 비밀번호가 틀립니다.", "/member/login")
         }
 
         //res.send('처리페이지');
@@ -44,8 +52,41 @@ const loginProc = ((req, res) => {
     }
 });
 
+
+const registerUser = async (req, res) => {
+    try {
+        let loginUserInfo = common.checkLogin(req, res);
+        if (loginUserInfo != null) {
+            let { user_id, user_pw} = req.body;
+
+            // XSS 방지
+            user_id = common.reqeustFilter(user_id, 20, false);
+            user_pw = common.reqeustFilter(user_pw, 20, false);
+
+            const result = await model.insertData(user_id, user_pw);
+
+            if (result != null) {
+                common.alertAndGo(res, "등록 되었습니다.", "/member")
+                //res.redirect('/member');
+        
+            } else {
+                common.alertAndGo(res, "등록 실패", "/member/register")
+            }
+
+        }
+
+    } catch (error) {
+        res.status(500).send('500 Error: ' + error);
+    }
+}
+
+
+
+
+
 module.exports = {
     signup,
     login,
-    loginProc
+    loginProc,
+    registerUser
 };
