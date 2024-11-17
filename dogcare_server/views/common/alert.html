@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Node JS</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <!-- SweetAlert2 CDN, link로 스타일 불러오기, script로 javascript파일 불러오기 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.4/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.4/dist/sweetalert2.all.min.js"></script>
+
+</head>
+<body>
+<script>
+    Swal.fire({
+            title: '알림',
+            text: '{{msg}}',  // msg 값 출력
+            icon: 'info',        // 아이콘 설정
+            confirmButtonText: 'OK',
+            willClose: () => {
+                window.location.href = '{{url}}';  // url 값으로 리다이렉션
+            }
+        });
+</script>
+</body>
+</html>

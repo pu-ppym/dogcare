@@ -5,13 +5,53 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>login</title>
+  <style>
+    .invalid-feedback {
+        color: red;
+    }
+    button.btn-login {
+        background-color: #007bff; 
+        color: white;
+    }
+
+    button.btn-signup {
+        background-color: #6c757d; 
+        color: white;
+    }
+
+</style>
 </head>
 <body>
 
 
-  
+  <div class="login-container">
+    <div>
+      <h2>로그인</h2>
+      <p>사용자 ID와 Password를 입력하세요.</p>
+    </div>
+    <form action="/member/login" method="POST" name="loginFrm" id="loginFrm">
+        <div class="form-group">
+            <label for="inputText">Id</label>
+            <input type="text" id="user_id" name="user_id">
+            <span class="invalid-feedback"></span>
+        </div>
+        <div class="form-group">
+            <label for="inputText">Password</label>
+            <input type="password" id="user_pw" name="user_pw">
+            <span class="invalid-feedback"></span>
+        </div>
+        <div class="button-group">
+          <button type="submit" class="btn-login">Login</button>
+          <button type="button" class="btn-signup" id="signupButton">Signup</button>
+      </div>
+    </form>
+</div>
 
-
+  <script>
+    document.getElementById('signupButton').addEventListener('click', function () {
+        window.location.href = '/member/register';
+    });
+  </script>
 
 
   <!-- Template Main JS File -->
@@ -47,7 +87,7 @@
         errorElement: 'span',
         errorPlacement: function (error, element) {
           error.addClass('invalid-feedback');
-          element.closest('.input-group').append(error);
+          element.closest('.form-group').append(error);
         },
         highlight: function (element, errorClass, validClass) {
           $(element).addClass('is-invalid');

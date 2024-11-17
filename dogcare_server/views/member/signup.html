@@ -7,15 +7,74 @@
         <div class="form-group">
             <label for="inputText">Id</label>
             <input type="text" id="user_id" name="user_id">
+            <span class="invalid-feedback"></span>
         </div>
         <div class="form-group">
             <label for="inputText">Password</label>
             <input type="password" id="user_pw" name="user_pw">
+            <span class="invalid-feedback"></span>
+        </div>
+        <div class="form-group">
+            <label for="inputText">Password confirm</label>
+            <input type="password" id="user_pw_ck" name="user_pw_ck">
+            <span class="invalid-feedback"></span>
         </div>
         <button type="submit">Register</button>
     </form>
 </div>
 
+
+<script type="text/javascript">
+    $(function () { // 페이지 로딩되면
+        $('#joinFrm').validate({
+            debug: false,
+            onkeyup: false,
+            submitHandler: function (f) {
+                f.submit();
+            },
+            rules: {
+                user_id: {
+                    required: true,
+                    remote: {
+                        url: "/member/checkUserId",
+                        type: "post",
+                    },
+                },
+                user_pw: {
+                    required: true,
+                },
+                user_pw_ck:{
+                    required: true,
+                    equalTo: '#user_pw',
+                }
+            },
+            messages: {
+                user_id: {
+                    required: "User ID를 입력하세요.",
+                    remote: "중복된 아이디!!!!",
+                },
+                user_pw: {
+                    required: "Password를 입력하세요.",
+                },
+                user_pw_ck: {
+                    required: "Password 확인을 입력하세요.",
+                    equalTo: "입력하신 비번이 서로 다릅니다",
+                }
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+    }); 
+</script>
   
 </main>
 

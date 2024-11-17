@@ -1,4 +1,5 @@
 const mysql = require('mysql2');
+require('dotenv').config();
 
 
 const db = {
@@ -7,6 +8,14 @@ const db = {
     password : process.env.PASSWORD,
     database : process.env.DATABASE
 };
+
+/* db연결 확인
+console.log("DB Configuration:", {
+    host: db.host,
+    user: db.user,
+    database: db.database,
+});
+*/
 
 const pool = mysql.createPool(db);
 const dbPool = pool.promise();

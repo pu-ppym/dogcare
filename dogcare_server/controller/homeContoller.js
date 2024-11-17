@@ -1,3 +1,5 @@
+const common = require('../common/common');
+
 const home = ((req, res) => {
     try {
         res.render('index');
