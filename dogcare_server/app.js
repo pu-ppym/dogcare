@@ -31,12 +31,14 @@ indexRouter = require('./router/home');
 gpsViewRouter = require('./router/gpsView');
 memberRouter = require('./router/member');
 pharmacyRouter = require('./router/pharmacy');
+weatherRouter = require('./router/weather');
 
 app.use('/', indexRouter);
 app.use('/gps', gpsViewRouter);
 app.use('/member', memberRouter);
 
 app.use('/pharmacy', pharmacyRouter);
+app.use('/weather', weatherRouter);
 
 
 

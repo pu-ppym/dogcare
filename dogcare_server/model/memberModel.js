@@ -31,10 +31,10 @@ const insertData = async(user_id, user_pw) => {
     }
 }
 
-const insertDogData = async(fkwoners, dog_name, dog_age, dog_gender, dog_breed) => {
+const insertDogData = async(fkwoners, dog_name, dog_age, dog_gender, dog_breed, dog_image) => {
     try {
-        const sql = "insert into dogs (fkowners, dog_name, dog_age, dog_gender, dog_breed) values (?, ?, ?, ?, ?);";
-        const param = [fkwoners, dog_name, dog_age, dog_gender, dog_breed];
+        const sql = "insert into dogs (fkowners, dog_name, dog_age, dog_gender, dog_breed, dog_image) values (?, ?, ?, ?, ?, ?);";
+        const param = [fkwoners, dog_name, dog_age, dog_gender, dog_breed, dog_image];
 
         const result = await db.runSql(sql, param);
 

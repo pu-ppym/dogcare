@@ -7,8 +7,4 @@ const controller = require('../controller/homeContoller');
 router.get('/', controller.home); 
 
 module.exports = router;
-/*  
-module.exports = {
-    router
-}
-*/
+

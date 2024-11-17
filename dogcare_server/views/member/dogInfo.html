@@ -2,7 +2,11 @@
 
 <div class="dog-info-container">
     <h2>강아지 정보 입력</h2>
-    <form action="/member/dogInfo" method="POST">
+    <form action="/member/dogInfo" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="attach_file">사진등록</label>
+            <input type="file" multiple name="attach_file" id="attach_file">
+          </div>
         <div class="form-group">
             <label for="dog_name">강아지 이름</label>
             <input type="text" id="dog_name" name="dog_name" placeholder="강아지 이름을 입력하세요" required>

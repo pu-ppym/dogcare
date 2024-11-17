@@ -132,7 +132,9 @@ const addDogInfoProc = async(req, res) => {
     try {
         let loginUserInfo = common.checkLogin(req, res);
         let {dog_name, dog_age, dog_gender, dog_breed} = req.body; // 강아지 정보 넘어올거
-        const result = await model.insertDogData(loginUserInfo.pkid, dog_name, dog_age, dog_gender, dog_breed);
+        const filePaths = req.files.map(file => file.path);
+        console.log('filepath:', filePaths);
+        const result = await model.insertDogData(loginUserInfo.pkid, dog_name, dog_age, dog_gender, dog_breed, JSON.stringify(filePaths));
 
             if (result != null) {
                 common.alertAndGo(res, "강아지 정보가 등록 되었습니다.", "/")

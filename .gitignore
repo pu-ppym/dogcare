@@ -1,3 +1,4 @@
 .env
 ec2_keypair.pem
 sessions/
+node_modules/
