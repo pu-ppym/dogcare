@@ -1,5 +1,6 @@
 //const model = require('../model/boardModel');
 
+
 const gpsView = ((req, res) => {
     try {
         res.render('gps/gpsView');

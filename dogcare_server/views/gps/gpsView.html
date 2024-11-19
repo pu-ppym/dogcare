@@ -1,5 +1,58 @@
-{% include "include/header.html" %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPS view</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map { height: 50vh; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // 초기화
+        const map = L.map('map').setView([37.5665, 126.9780], 13); // 임시 좌표  // 위도,경도,확대레벨
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+/*
+        // WebSocket 연결
+        const ws = new WebSocket('ws://localhost:5000');
 
-<main>
-  <h2>gps</h2>
-</main>
+        let marker;
+
+        ws.onmessage = (event) => {    // 서버로 메시지 수신할때 실행됨
+            const data = JSON.parse(event.data);    // 어케 넘어올지 몰겟음 예시 {"latitude": 37.5665, "longitude": 126.9780}
+            const { latitude, longitude } = data;
+
+            if (marker) {
+                marker.setLatLng([latitude, longitude]); // 마커 업데이트
+            } else {
+                marker = L.marker([latitude, longitude]).addTo(map); // 첫 마커 생성
+            }
+
+            map.setView([latitude, longitude], 15); // 지도 중심 이동
+        };
+        */
+
+        const customIcon = L.icon({
+          iconUrl: 'https://cdn-icons-png.flaticon.com/512/9349/9349135.png',
+          iconSize: [40, 40],  
+          iconAnchor: [16, 32],  // 아이콘의 앵커 위치
+          popupAnchor: [5, -32]  // 팝업의 위치
+        });
+
+        let marker;
+        marker = L.marker([37.5491, 126.7234], { icon: customIcon }).addTo(map);
+        map.setView([37.5491, 126.7234], 15);
+
+
+        marker.bindPopup('test').openPopup();
+
+
+    </script>
+</body>
+</html>
