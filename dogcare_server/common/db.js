@@ -9,13 +9,13 @@ const db = {
     database : process.env.DATABASE
 };
 
-/* db연결 확인
+// db연결 확인
 console.log("DB Configuration:", {
     host: db.host,
     user: db.user,
     database: db.database,
 });
-*/
+
 
 const pool = mysql.createPool(db);
 const dbPool = pool.promise();

@@ -10,6 +10,7 @@ nunjucks.configure('views', {
 
 // 정적파일 처리
 app.use('/assets', express.static(__dirname + '/assets'));
+app.use('/img', express.static(__dirname + '/img'));
 
 // 세션사용을 위한 세팅
 const session = require('express-session');

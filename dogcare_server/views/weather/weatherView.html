@@ -1,5 +1,28 @@
-{% include "include/header.html" %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Image Example</title>
+    <style>
+        #weatherImg {
+            /* border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+            vertical-align: middle;
+        }
+    </style>
+</head>
 
-<main>
-  <h2>weather</h2>
-</main>
+<body>
+  <main>
+    <h2>산책가자! 오늘 날씨는?</h2>
+    <img id="weatherImg" src="/img/{{ weatherInfo.weatherImage }}" alt="Weather" width="50">
+    <span>{{weatherInfo.temperature}}°C {{weatherInfo.mainWeather}}</span>
+    <p>조금 춥네요. 강아지 옷 꼭 챙겨주세요!🐾</p>
+    <p>추운 날! 강아지 패딩이 필요해요. 🧥🐕</p>
+    
+   
+    
+  </main>
+</body>
+</html>
