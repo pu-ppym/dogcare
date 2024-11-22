@@ -1,6 +1,6 @@
 const xss = require('xss');
 const path = require('path');
-
+const fs = require('fs'); 
 
 
 
@@ -97,6 +97,31 @@ const fileFilter = (req, file, callbackfuc) => {
 
 }
 
+const getFileExtension = (filename) => {
+    return '.' + filename.split('.').pop();
+
+}
+
+const moveFile = (sourceFile, targetFile) => {
+    try {  // 파일관련 무적권 try, e.g 공간 부족할때 오류날수있음
+        const sourcePath = path.join(__dirname, '..', sourceFile);  // sourceFile 절대 경로로
+        const targetPath = path.join(__dirname, '..', targetFile);
+
+        //console.log('sourcePath: ', sourcePath);  
+        //console.log('targetPath: ', targetPath); 
+
+    
+        if(fs.existsSync(sourcePath)) {
+            console.log('Source file exists.');
+            fs.renameSync(sourcePath, targetPath)
+            console.log('File moved successfully!');
+        }
+
+    } catch (error) {
+        throw 'moveFile Error';
+    }
+}
+
 
 
 module.exports = {
@@ -104,5 +129,7 @@ module.exports = {
     alertAndGo,
     reqeustFilter,
     dateFormat,
-    fileFilter
+    fileFilter,
+    getFileExtension,
+    moveFile
 }

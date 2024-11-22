@@ -3,6 +3,7 @@ const router = express.Router();
 const controller = require('../controller/memberController');
 const common = require('../common/common');
 const multer = require('multer');
+const path = require('path');
 
 const upload = multer({
     // 저장 장소

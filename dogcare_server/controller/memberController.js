@@ -132,9 +132,27 @@ const addDogInfoProc = async(req, res) => {
     try {
         let loginUserInfo = common.checkLogin(req, res);
         let {dog_name, dog_age, dog_gender, dog_breed} = req.body; // 강아지 정보 넘어올거
-        const filePaths = req.files.map(file => file.path);
-        console.log('filepath:', filePaths);
-        const result = await model.insertDogData(loginUserInfo.pkid, dog_name, dog_age, dog_gender, dog_breed, JSON.stringify(filePaths));
+        //const filePaths = req.files.map(file => file.path);
+        //console.log('filepath:', filePaths);
+
+        //const filePath = req.files.length > 0 ? req.files[0].path : null;
+        //console.log('filepath:', filePath);
+
+        let {filePath, originalname} = ['', ''];
+        if(req.files[0] != null) {
+            originalname = req.files[0].originalname;
+
+            // 파일명 변경
+            filePath = 'uploads/' + req.files[0].filename + common.getFileExtension(req.files[0].originalname);
+            console.log('proc 파일경로: ', filePath);
+            console.log('moveFile 테스트, sourceFile : ', req.files[0].filename);
+            
+            // 파일을 실제 변경해줌
+            common.moveFile('uploads/' + req.files[0].filename, filePath); 
+        }
+
+        //const result = await model.insertDogData(loginUserInfo.pkid, dog_name, dog_age, dog_gender, dog_breed, JSON.stringify(filePath));
+        const result = await model.insertDogData(loginUserInfo.pkid, dog_name, dog_age, dog_gender, dog_breed, filePath);
 
             if (result != null) {
                 common.alertAndGo(res, "강아지 정보가 등록 되었습니다.", "/")
