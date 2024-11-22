@@ -2,25 +2,7 @@ const fs = require('fs');
 const csv = require('csv-parser');
 
 
-/*
-const results = [];
-
-fs.createReadStream('animal_pharmacy.csv')  // 파일 경로를 적어주세요.
-  .pipe(csv({ headers: ['FRNM_NM', 'RN_ADDR', 'OPR_TIME_INFO', 'RPRS_TELNO', 'HMPG_URL', 'LA_VLUE', 'LO_VLUE'] }))
-  .on('data', (data) => results.push(data))
-  .on('end', () => {
-    //console.log(results);  // 읽은 데이터를 콘솔에 출력
-    // 데이터 접근하기
-    results.forEach(item => {
-        console.log(item['FRNM_NM']);   // 'FRNM_NM' 컬럼의 값 출력
-      console.log(item.LA_VLUE);   // 'RN_ADDR' 컬럼의 값 출력
-      //console.log(item.OPR_TIME_INFO);   // 'OPR_TIME_INFO' 컬럼의 값 출력
-    });
-  });
-
-*/
-
-
+// csv
 const loadPharmacyData = () => {
     return new Promise((resolve, reject) => {
       const pharmacyData = [];
@@ -38,6 +20,7 @@ const loadPharmacyData = () => {
             name: pharmacy.FRNM_NM,
             lat: parseFloat(pharmacy.LA_VLUE),
             lng: parseFloat(pharmacy.LO_VLUE),
+            desc: pharmacy.OPR_TIME_INFO || '정보 없음',
           }));
           
           //console.log(leafletData);  // 여기까지 잘뜸
@@ -49,16 +32,48 @@ const loadPharmacyData = () => {
         });
     });
   };
+
+
+  // Haversine 공식으로 두 지점 간의 거리 계산
+function haversine(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Earth radius in km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c; // Distance in km
+    return distance;
+  }
   
 
 const view = async (req, res) => {
     try {
         
         const leafletData = await loadPharmacyData();
-        console.log('테스트: ', leafletData);
 
-        console.log('csv_view_테스트: ', leafletData[0]);
-        res.render('pharmacy/view', { pharmacies: leafletData });
+         // 현재 위치 임시
+        const currentLat = 37.5491;
+        const currentLng = 126.7234;
+
+        // 거리 계산 후, 가까운 순으로 정렬
+        const sortedPharmacies = leafletData.map(pharmacy => ({
+            ...pharmacy,
+            distance: haversine(currentLat, currentLng, pharmacy.lat, pharmacy.lng),
+        })).sort((a, b) => a.distance - b.distance);
+
+        // 가까운 5개 약국만 뽑기
+        const nearestPharmacies = sortedPharmacies.slice(0, 5);
+
+        console.log('테스트: ', nearestPharmacies);
+        //console.log('csv_view_테스트: ', leafletData[0]);
+        //console.log('넘겨주기전 테스트: ', JSON.stringify(nearestPharmacies));
+        //res.render('pharmacy/view', JSON.stringify(nearestPharmacies) );
+        /////res.render('pharmacy/view', { nearestPharmacies });
+        res.render('pharmacy/view', {nearestPharmacies: JSON.stringify(nearestPharmacies) });
 
     } catch (error) {
         res.status(500).send('500 Error: ' + error);
