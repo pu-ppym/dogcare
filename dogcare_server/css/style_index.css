@@ -1,18 +1,18 @@
 :root {
-  --background-color: #f0f8ff; /* 전체 배경색 */
-  --accent-color: #1fa8f5; /* 강조 색상 */
+  --background: linear-gradient(135deg, #FFDAB9, #E1BBF5); /* 전체 배경색 */
+  --accent-color: #FFB6B9; /* 강조 색상 */
   --text-color: #444; /* 텍스트 색상 */
   --icon-size: 2.5rem; /* 아이콘 크기 */
   --font-size: 1.2rem; /* 텍스트 크기 */
   --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 */
-  --active-color: #005f99; /* 활성화 시 색상 */
+  --active-color: #FFB6B9; /* 활성화 시 색상 */
 }
 
 body {
   font-family: "Roboto", sans-serif;
   margin: 0;
   padding: 0;
-  background-color: var(--background-color);
+  background: var(--background);
   display: flex;
   flex-direction: column; /* 상단-중앙-하단 구조 */
   height: 100vh; /* 전체 화면 높이 */
