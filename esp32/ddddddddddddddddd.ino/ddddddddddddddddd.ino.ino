@@ -16,7 +16,7 @@ PulseSensorPlayground pulseSensor;  // PulseSensor 객체 생성
 void setup()
 {
   Serial.begin(115200); // 기본 직렬 모니터
-  ss.begin(9600, SERIAL_8N1, 4, 3); // 핀 4를 RX, 핀 3을 TX로 설정
+  ss.begin(9600, SERIAL_8N1, 3, 1);  // RX는 GPIO3, TX는 GPIO1로 설정
 
   pinMode(heartRatePin, INPUT); // 심박 센서 핀 초기화
   pinMode(vibrationPin, INPUT); // 진동 센서 핀 초기화
