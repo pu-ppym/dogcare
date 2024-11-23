@@ -5,8 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>건강하개</title>
-
   <link rel="stylesheet" href="../css/style_index.css">
+  <!-- 폰트 -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+
 
   <!-- jquery validation-->
   <script src="https://code.jquery.com/jquery-latest.min.js"></script>
@@ -15,34 +18,51 @@
 </head>
 
 <body>
-
-  <main id="main" class="main">
-
-    <div class="pagetitle">
-      <h1>건강하개</h1>
-    </div><!-- End Page Title -->
-
-    <section class="section">
-      <div class="profile-container">
-        <img src="{{viewData.dog_image}}" alt="강아지 프로필 사진" class="dog_image_profile">
-        <div class="dog-info">
-          <p>{{ viewData.dog_name }}</p>
-          <p>나이: {{ viewData.dog_age }}살</p>
-          <p>견종: {{ viewData.dog_breed }}</p>
+  <!-- 프로필 컨테이너 영역 -->
+  <div class="content">
+    <div class="profile-container">
+        <div class="settings-icon">
+            ⚙
         </div>
-      </div>
+        <div class="dog-photo">
+          <img src="{{viewData.dog_image}}" alt="강아지 프로필 사진" class="dog-photo">
+        </div>
+        <div class="dog-info">
+            <p><b>{{ viewData.dog_name }}</b> </p>
+            <p>나이: {{ viewData.dog_age }}살</p>
+            <p>견종: {{ viewData.dog_breed }}</p>
+        </div>
+        <div class="health-info">
+            <p><span>❤️</span> 심박수: </p>
+            <p><span>🌡️</span> &nbsp; 체온: </p>
+            <p><span>🐾</span> 걸음 수: </p>
+        </div>
+    </div>
+</div>
 
-      <div class="navbar">
-        <a class="active" href="#home">Home</a>
-        <a href="/gps/">gps</a>
-        <a href="/pharmacy/">주변약국</a>
-        <a href="/weather/">날씨</a>
-      </div>
-      </div>
+<!-- 하단 네비게이션 바 -->
+<div class="tabbar tab-style4">
+  <ul class="flex-center">
+      <li class="home active" data-where="home" data-href="/">
+          <span class="material-icons-outlined">home</span>
+          <p>HOME</p>
+      </li>
+      <li class="gps" data-where="gps" data-href="/gps/">
+          <span class="material-icons-outlined">location_on</span>
+          <p>GPS</p>
+      </li>
+      <li class="pharmacy" data-where="pharmacy" data-href="/pharmacy/">
+          <span class="material-icons-outlined">local_pharmacy</span>
+          <p>주변약국</p>
+      </li>
+      <li class="weather" data-where="weather" data-href="/weather/">
+          <span class="material-icons-outlined">wb_sunny</span>
+          <p>날씨</p>
+      </li>
+  </ul>
+</div>
 
-      </div>
-    </section>
-
-  </main>
+<script src="../js/script_index.js"></script>
+  
 
   {% include "include/footer.html" %}

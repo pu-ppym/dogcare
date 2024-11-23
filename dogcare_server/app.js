@@ -14,6 +14,7 @@ app.use('/assets', express.static(__dirname + '/assets'));
 app.use('/img', express.static(__dirname + '/img'));
 app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use('/css', express.static(path.join(__dirname, 'css')));
+app.use('/js', express.static(path.join(__dirname, 'js')));
 //app.use('/uploads', express.static(path.join(__dirname, 'uploads')));    // 경로구분자 처리해줌 날씨이미지.. 안되면 이렇게해야됨
 
 //console.log('app 테스트: ', path.join(__dirname, 'uploads'));

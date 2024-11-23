@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GPS view</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="../css/style_index.css">
+    <!-- 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+    
     <style>
-        #map { height: 50vh; }
+        
     </style>
 </head>
 <body>
@@ -56,5 +61,33 @@
 
 
     </script>
+
+
+<!-- 하단 네비게이션 바 -->
+<div class="tabbar tab-style4">
+    <ul class="flex-center">
+        <li class="home active" data-where="home" data-href="/">
+            <span class="material-icons-outlined">home</span>
+            <p>HOME</p>
+        </li>
+        <li class="gps" data-where="gps" data-href="/gps/">
+            <span class="material-icons-outlined">location_on</span>
+            <p>GPS</p>
+        </li>
+        <li class="pharmacy" data-where="pharmacy" data-href="/pharmacy/">
+            <span class="material-icons-outlined">local_pharmacy</span>
+            <p>주변약국</p>
+        </li>
+        <li class="weather" data-where="weather" data-href="/weather/">
+            <span class="material-icons-outlined">wb_sunny</span>
+            <p>날씨</p>
+        </li>
+    </ul>
+  </div>
+
+
+  <script src="../js/script_index.js"></script>
+
+  
 </body>
 </html>
