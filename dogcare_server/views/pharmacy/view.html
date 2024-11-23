@@ -7,6 +7,13 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
     #map { height: 50vh; }
+    #info {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background: #f9f9f9;
+    }
   </style>
 </head>
 <body>
@@ -14,22 +21,40 @@
   
   
   <div id="map"></div>
+  <div id="info">지도에서 약국을 터치해주세요.</div>
   
   <script>
     const nearestPharmacies = JSON.parse('{{ nearestPharmacies | safe }}');
     console.log('view: ', nearestPharmacies);
-    var map = L.map('map').setView([37.54514313, 126.7269592], 13); // 기본 위치 설정
+    var map = L.map('map').setView([37.54514313, 126.7269592], 15); // 기본 위치 설정
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
     // 약국 정보 기반으로 마커 추가
+    /*
     nearestPharmacies.forEach(function(pharmacy) {
       L.marker([pharmacy.lat, pharmacy.lng])
         .addTo(map)
-        .bindPopup("<b>" + pharmacy.name + "</b><br>" + pharmacy.desc + "<br>거리: " + pharmacy.distance + " km");
+        .bindPopup("<b>" + pharmacy.name + "</b><br>" + pharmacy.desc);
     });
+    */
+
+    nearestPharmacies.forEach(function(pharmacy) {
+      const marker = L.marker([pharmacy.lat, pharmacy.lng]).addTo(map);
+
+      // 마커에 팝업 추가 (약국 이름만 표시)
+      marker.bindPopup("<b>" + pharmacy.name + "</b>");
+
+      // 마커 클릭 시 info 영역에 약국 설명 표시
+      marker.on('click', function() {
+        const infoDiv = document.getElementById('info');
+        infoDiv.innerHTML = `<h3>${pharmacy.name}</h3><p>${pharmacy.desc}</p>`;
+      });
+    });
+
+
   </script>
 
 </body>

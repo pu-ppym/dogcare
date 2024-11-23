@@ -13,6 +13,7 @@ nunjucks.configure('views', {
 app.use('/assets', express.static(__dirname + '/assets'));
 app.use('/img', express.static(__dirname + '/img'));
 app.use('/uploads', express.static(__dirname + '/uploads'));
+app.use('/css', express.static(path.join(__dirname, 'css')));
 //app.use('/uploads', express.static(path.join(__dirname, 'uploads')));    // 경로구분자 처리해줌 날씨이미지.. 안되면 이렇게해야됨
 
 //console.log('app 테스트: ', path.join(__dirname, 'uploads'));
@@ -20,15 +21,20 @@ app.use('/uploads', express.static(__dirname + '/uploads'));
 
 
 
+
 // 세션사용을 위한 세팅
 const session = require('express-session');
-const sessionFile = require('session-file-store')(session);
+//const sessionFile = require('session-file-store')(session);
+const sessionDB = require('express-mysql-session')(session);
+const db = require('./common/db');
+
 
 // 세션 세팅
 app.use(session({
-    secret: "kiwu",
+    secret: "jio",
     resave: true,
-    store: new sessionFile({logFn: function(){}})
+    //store: new sessionFile({logFn: function(){}})
+    store: new sessionDB(db.db)
 }));
 
 // post 값 받기

@@ -13,6 +13,8 @@
     <div id="map"></div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
+        const viewData = JSON.parse('{{ viewData | safe }}');
+
         // 초기화
         const map = L.map('map').setView([37.5665, 126.9780], 13); // 임시 좌표  // 위도,경도,확대레벨
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -50,7 +52,7 @@
         map.setView([37.5491, 126.7234], 15);
 
 
-        marker.bindPopup('test').openPopup();
+        marker.bindPopup("<b> 현재 " + viewData.dog_name + "의 위치입니다 </b>").openPopup();
 
 
     </script>

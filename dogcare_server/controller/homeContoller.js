@@ -10,7 +10,6 @@ const home = (async(req, res) => {
             console.log('이름: ', viewData.dog_name);
             console.log('나이: ', viewData.dog_age);
             console.log('종: ', viewData.dog_breed);
-            console.log('이미지테스트: ', viewData.dog_image);
 
             res.render('index', {viewData});   // index.html
         }
