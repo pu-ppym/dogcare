@@ -7,7 +7,7 @@ const normalizePath = (filePath) => {
 
 const getData = async(pkid) => {
     try {
-        const sql = "select o.user_id, o.user_pw, d.dog_name, d.dog_age, d.dog_gender, d.dog_breed, d.dog_image from dogs as d inner join owners as o on d.fkowners = o.pkid where o.pkid = ?";
+        const sql = "select o.user_id, o.user_pw, d.dog_name, d.dog_age, d.dog_gender, d.dog_breed, d.dog_image, d.pkid from dogs as d inner join owners as o on d.fkowners = o.pkid where o.pkid = ?";
         const param = [pkid];
 
         const result = await db.runSql(sql, param);
@@ -30,6 +30,22 @@ const getData = async(pkid) => {
     }
 }
 
+const insertData = async(fkdogs, heartRate, temperature, vibration) => {
+    try {
+        const sql = "insert into health_data (fkdogs, heart_rate, temperature, steps) values (?, ?, ?, ?);";
+        const param = [fkdogs, heartRate, temperature, vibration];
+
+        const result = await db.runSql(sql, param);
+
+        console.log(result);
+
+        return result;
+    } catch (error) {
+        throw "SQL Query Error on insertData";
+    }
+}
+
 module.exports = {
-    getData
+    getData,
+    insertData
 }
