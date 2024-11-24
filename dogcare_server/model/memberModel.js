@@ -46,6 +46,34 @@ const insertDogData = async(fkwoners, dog_name, dog_age, dog_gender, dog_breed, 
     }
 }
 
+const getDogIdUpdate = async(fkowners) => {
+    try {
+        const sql = "select pkid from dogs where fkowners = ?;";
+        const param = [fkowners];
+        console.log('넘어오는값:', fkowners);
+
+        const result = await db.runSql(sql, param);
+        const dogPkid = result[0].pkid;
+        console.log(`dog ID Count: ${dogPkid}`);
+
+        if (result != null) {
+            const updateSql = "UPDATE owners SET selected_dog = ? WHERE pkid = ?";
+            const updateParam = [dogPkid, fkowners];
+            const updateResult = await db.runSql(updateSql, updateParam);
+
+            console.log(`Rows updated: ${updateResult.affectedRows}`);
+
+            return result;
+        }
+       // return result;
+    } catch (error) {
+        console.log(error);
+        throw "SQL Query Error on getDogIdUpdate";
+        
+    }
+
+}
+
 const getUserIdCount = async (user_id) => {
     try {
         const sql = "select count(pkid) as cnt from owners where user_id = ?";
@@ -81,5 +109,6 @@ module.exports = {
     insertData,
     getUserIdCount,
     getDogInfoCount,
-    insertDogData
+    insertDogData,
+    getDogIdUpdate
 }

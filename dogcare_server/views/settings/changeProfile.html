@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로필 변경</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/styles_settings_profile.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>프로필 변경</h2>
+        
+        
+            {% if dataCount > 1 %}
+        <div class="button-group">
+            {% for dogs in viewData %}
+                <form method="POST" action="/setting/change">
+                    <button type="submit" id="button-{{ dogs.pkid }}">
+                        {% if dogs.dog_image %}
+                            <img src="/{{ dogs.dog_image }}" alt="강아지 프로필 사진" class="dog-photo">
+                            <span>{{ dogs.dog_name }}</span>
+                        {% else %}
+                            <div class="no-photo">No Image</div>
+                        {% endif %}
+                    </button>
+                    <input type="hidden" name="dog_pkid" value="{{ dogs.pkid }}">
+                </form>
+            {% endfor %}
+        </div>
+    {% elseif dataCount === 1 %}
+        <!-- 하나의 강아지 정보만 있을 경우 추가 버튼만 표시 -->
+        <form method="get" action="/member/dogInfo" class="addButton">
+            <button type="submit">강아지 정보 추가</button>
+        </form>
+    {% else %}
+        <p>No data available</p>
+    {% endif %}
+    <form method="get" action="/member/dogInfo" class="addButton">
+        <button type="submit">강아지 정보 추가</button>
+    </form>
+    </div>
+
+</body>
+</html>

@@ -48,6 +48,7 @@ gpsViewRouter = require('./router/gpsView');
 memberRouter = require('./router/member');
 pharmacyRouter = require('./router/pharmacy');
 weatherRouter = require('./router/weather');
+settingRouter = require('./router/setting');
 
 app.use('/', indexRouter);
 app.use('/gps', gpsViewRouter);
@@ -55,6 +56,7 @@ app.use('/member', memberRouter);
 
 app.use('/pharmacy', pharmacyRouter);
 app.use('/weather', weatherRouter);
+app.use('/setting', settingRouter);
 
 
 // 웹소켓 테스트

@@ -155,11 +155,17 @@ const addDogInfoProc = async(req, res) => {
         const result = await model.insertDogData(loginUserInfo.pkid, dog_name, dog_age, dog_gender, dog_breed, filePath);
 
             if (result != null) {
-                common.alertAndGo(res, "강아지 정보가 등록 되었습니다.", "/")
+                const resultUpdate = await model.getDogIdUpdate(loginUserInfo.pkid);
+                if (resultUpdate != null) {
+                    common.alertAndGo(res, "강아지 정보가 등록 되었습니다.", "/");
+                } else {
+                    common.alertAndGo(res, "등록, 업데이트 실패", "/member/dogInfo");
+                }
+                
                 //res.redirect('/member');
         
             } else {
-                common.alertAndGo(res, "등록 실패", "/member/dogInfo")
+                common.alertAndGo(res, "등록 실패", "/member/dogInfo");
             }
 
     } catch (error) {

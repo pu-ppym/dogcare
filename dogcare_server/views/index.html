@@ -22,7 +22,9 @@
   <div class="content">
     <div class="profile-container">
         <div class="settings-icon">
-            ⚙
+            <button onclick="window.location.href='/setting'" class="settings-button">
+                <img src="../img/settings.png" alt="설정 아이콘">
+            </button>
         </div>
         <div class="dog-photo">
           <img src="{{viewData.dog_image}}" alt="강아지 프로필 사진" class="dog-photo">
@@ -34,7 +36,7 @@
         </div>
         <div class="health-info">
             <p><span>❤️</span> 심박수: &nbsp; <b>{{viewData.heartRate  }}</b></p>
-            <p><span>🌡️</span> &nbsp; 체온: &nbsp; <b>38.7 </b></p>
+            <p><span>🌡️</span> &nbsp; 체온: &nbsp; <b>{{viewData.temperature}} </b></p>
             <p><span>🐾</span> 걸음 수: &nbsp; <b>{{viewData.vibration }}</b></p>
         </div>
     </div>

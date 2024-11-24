@@ -45,6 +45,13 @@ body {
   overflow: hidden;
   min-height: 400px; /* 프로필 컨테이너 높이 */
 }
+.settings-button {
+  background-color: transparent;
+  border: none;
+  font-size: 24px; /* 크기를 조정 */
+  cursor: pointer;
+  color: #333; /* 톱니바퀴 색상 */
+}
 
 .settings-icon {
   position: absolute;

@@ -31,7 +31,7 @@
         <span>{{weatherInfo.temperature}}°C {{weatherInfo.mainWeather}}</span>
         
     </div>
-    <p>조금 춥네요. 강아지 옷 꼭 챙겨주세요!🐾</p>
+    <p>{{ weatherInfo.message |safe }}</p>
     
     
     

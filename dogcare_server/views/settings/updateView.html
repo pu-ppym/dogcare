@@ -13,32 +13,32 @@
 <body>
 
 <div class="dog-info-container">
-    <h2>강아지 정보 입력</h2>
-    <form action="/member/dogInfo" method="POST" enctype="multipart/form-data">
+    <h2>강아지 정보 수정</h2>
+    <form action="/setting/update" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <input type="file" multiple name="attach_file" id="attach_file">
           </div>
         <div class="form-group">
             <label for="dog_name"></label>
-            <input type="text" id="dog_name" name="dog_name" placeholder="강아지 이름을 입력하세요" required>
+            <input type="text" id="dog_name" name="dog_name" value="{{viewData.dog_name}}">
         </div>
         <div class="form-group">
             <label for="dog_age"></label>
-            <input type="number" id="dog_age" name="dog_age" placeholder="강아지 나이를 입력하세요" required>
+            <input type="number" id="dog_age" name="dog_age" value="{{viewData.dog_age}}">
         </div>
         <div class="form-group">
             <label for="dog_gender"></label>
             <select id="dog_gender" name="dog_gender" required>
                 <option value="">강아지 성별을 선택하세요</option>
-                <option value="female">암컷</option>
-                <option value="male">수컷</option>
+                <option value="female" {% if dog_gender == 'female' %}selected{% endif %}>암컷</option>
+                <option value="male" {% if dog_gender == 'male' %}selected{% endif %}>수컷</option>
             </select>
         </div>
         <div class="form-group">
             <label for="dog_breed"></label>
-            <input type="text" id="dog_breed" name="dog_breed" placeholder="강아지 종을 입력하세요" required>
+            <input type="text" id="dog_breed" name="dog_breed" value="{{viewData.dog_breed}}">
         </div>
-        <button type="submit">등록하기</button>
+        <button type="submit">수정하기</button>
     </form>
 </div>
 
