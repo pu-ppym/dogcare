@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GPS view</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="../css/style_index.css">
+    <link rel="stylesheet" href="../css/style_gps.css">
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
@@ -15,7 +15,9 @@
     </style>
 </head>
 <body>
-    <div id="map"></div>
+    <div class="content">
+        <div id="map"></div>
+    </div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         const viewData = JSON.parse('{{ viewData | safe }}');

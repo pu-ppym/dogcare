@@ -1,27 +1,51 @@
-{% include "include/header.html" %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/styles_login.css">
+
+  <title>signup</title>
+  <style>
+
+</style>
+</head>
+<body>
 
 <main>
   <div class="signup-container">
-    <h2>회원 가입</h2>
+    <div>
+        <h2>회원가입</h2>
+      </div>
     <form action="/member/register" method="POST" name="joinFrm" id="joinFrm">
         <div class="form-group">
-            <label for="inputText">Id</label>
+            
             <input type="text" id="user_id" name="user_id">
+            <label for="inputText">ID</label>
             <span class="invalid-feedback"></span>
         </div>
         <div class="form-group">
-            <label for="inputText">Password</label>
+            
             <input type="password" id="user_pw" name="user_pw">
+            <label for="inputText">Password</label>
             <span class="invalid-feedback"></span>
         </div>
         <div class="form-group">
-            <label for="inputText">Password confirm</label>
+            
             <input type="password" id="user_pw_ck" name="user_pw_ck">
+            <label for="inputText">Password confirm</label>
             <span class="invalid-feedback"></span>
         </div>
-        <button type="submit">Register</button>
+        <button type="submit">확인</button>
     </form>
 </div>
+
+
+<!-- jquery validation-->
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.21.0/jquery.validate.min.js"></script>
 
 
 <script type="text/javascript">
@@ -75,7 +99,20 @@
         });
     }); 
 </script>
+
+<script>
+    $(document).ready(function () {
+  $('input').on('input', function () {
+    if ($(this).val()) {
+      $(this).next('label').addClass('input-filled');
+    } else {
+      $(this).next('label').removeClass('input-filled');
+    }
+  });
+});
+</script>
   
 </main>
 
-{% include "include/footer.html" %}
+</body>
+</html>

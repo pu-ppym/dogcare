@@ -21,82 +21,27 @@ body {
   padding: 0;
   background: var(--background);
   display: flex;
-  flex-direction: column; /* 상단-중앙-하단 구조 */
+  justify-content: center;  /* 수평 중앙 정렬 */
+  align-items: flex-start;  /* 세로 방향으로는 상단부터 정렬 */
   height: 100vh; /* 전체 화면 높이 */
 }
 
 .content {
-  flex: 1; /* 하단 네비게이션 바를 제외한 영역 */
+  width: 90%;  /* 화면 너비의 90%로 설정 */
+  max-width: 600px;  /* 최대 너비 600px로 설정 */
+  background-color: white; /* 하얀색 배경 */
+  border-radius: 10px; /* 모서리 둥글게 */
+  box-shadow: var(--box-shadow); /* 그림자 추가 */
+  overflow: hidden; /* 내용이 넘치지 않도록 설정 */
+  padding: 20px;  /* 내부 여백 추가 */
   display: flex;
-  justify-content: center; /* 가로 중앙 정렬 */
-  align-items: center; /* 세로 중앙 정렬 */
-  padding-bottom: 80px; /* 네비게이션 바와 겹치지 않도록 여백 */
-  max-height: calc(100vh - 80px); /* 화면 높이에서 네비게이션 바의 높이를 제외한 영역 */
-}
-
-.profile-container {
-  width: 90%;
-  max-width: 400px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: var(--box-shadow);
-  padding: 30px 20px;
-  position: relative;
-  overflow: hidden;
-  min-height: 400px; /* 프로필 컨테이너 높이 */
-}
-
-.settings-icon {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  cursor: pointer;
-  font-size: 2.25rem; /* 이모티콘 크기 */
-  color: var(--text-color); /* 이모티콘 색상 */
-}
-
-.settings-icon img {
-  width: 24px;
-  height: 24px;
-}
-
-.dog-photo {
-  width: 140px; /* 사진 크기 */
-  height: 140px;
-  background: #eaeaea;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  float: left;
-  margin-right: 20px;
-  object-fit: cover;
-}
-
-.dog-info p {
-  margin: 15px 0; /* 텍스트 간 여백 */
-  color: var(--text-color);
-  font-size: 1.4rem;
-}
-
-.health-info {
-  clear: both;
-  margin-top: 40px; /* 상단 여백 */
-  padding-top: 20px;
-  border-top: 1px solid #ddd; /* 구분선 */
-}
-
-.health-info p {
-  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* 세로 중앙 정렬 */
   align-items: center;
-  margin: 40px 0; /* 텍스트 간 여백 */
-  color: var(--text-color);
-  font-size: 1.3rem;
+  position: relative;
+  top: 100px; /* 위로 30px만큼 올리기 */
 }
 
-.health-info span {
-  margin-right: 10px; /* 아이콘과 텍스트 간격 */
-  font-size: 1.5rem; /* 아이콘 크기 */
-}
 
 .tabbar {
   background-color: white;
@@ -164,7 +109,14 @@ body {
 }
 
 
-#map { height: 50vh;  }
+
+#map {
+  width: 100%;   /* 지도 너비를 100%로 설정 */
+  height: 350px;  /* 고정된 높이로 설정 */
+  background-color: white; /* 하얀색 배경 */
+  border-radius: 10px; /* 모서리 둥글게 */
+  box-shadow: var(--box-shadow); /* 그림자 추가 */
+}
 
 
 #info {

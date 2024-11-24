@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Image Example</title>
 
-    <link rel="stylesheet" href="../css/style_index.css">
+    <link rel="stylesheet" href="../css/style_weather.css">
 
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
@@ -23,14 +23,15 @@
 
 <body>
   <main>
+    <div class="container">
     <h2>산책가자! 오늘 날씨는?</h2>
     <img id="weatherImg" src="/img/{{ weatherInfo.weatherImage }}" alt="Weather" width="50">
     <span>{{weatherInfo.temperature}}°C {{weatherInfo.mainWeather}}</span>
     <p>조금 춥네요. 강아지 옷 꼭 챙겨주세요!🐾</p>
-    <p>추운 날! 강아지 패딩이 필요해요. 🧥🐕</p>
+    
     
    
-    
+</div>
   </main>
 
 

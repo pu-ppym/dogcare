@@ -19,6 +19,14 @@ const home = (async(req, res) => {
     }
 });
 
+
+const espData = (req, res) => {
+    const data = req.body;
+    console.log('Received data:', data);
+};
+
+
 module.exports = {
-    home
+    home,
+    espData
 };

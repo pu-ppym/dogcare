@@ -57,6 +57,10 @@ app.use('/pharmacy', pharmacyRouter);
 app.use('/weather', weatherRouter);
 
 
+// 웹소켓 테스트
+const startWebSocketServer = require('./common/websocket'); // websocket.js 불러오기
+// WebSocket 서버 실행
+startWebSocketServer();
 
 
 // 404 not found
@@ -68,5 +72,7 @@ app.use((req,res) => {
 
 app.listen(3000, () => {
     console.log('3000포트에서 express 서버 대기 중...');
+
+    
 });
 

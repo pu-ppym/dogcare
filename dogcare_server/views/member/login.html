@@ -5,22 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/styles_login.css">
 
   <title>login</title>
   <style>
-    .invalid-feedback {
-        color: red;
-    }
-    button.btn-login {
-        background-color: #007bff; 
-        color: white;
-    }
-
-    button.btn-signup {
-        background-color: #6c757d; 
-        color: white;
-    }
 
 </style>
 </head>
@@ -29,23 +18,24 @@
 
   <div class="login-container">
     <div>
-      <h2>로그인</h2>
-      <p>사용자 ID와 Password를 입력하세요.</p>
+      <h2>건강하개</h2>
     </div>
     <form action="/member/login" method="POST" name="loginFrm" id="loginFrm">
         <div class="form-group">
-            <label for="inputText">Id</label>
-            <input type="text" id="user_id" name="user_id">
+            
+            <input type="text" id="user_id" name="user_id" required placeholder=" ">
+            <label for="inputText">ID</label>
             <span class="invalid-feedback"></span>
         </div>
         <div class="form-group">
+            
+            <input type="password" id="user_pw" name="user_pw" required placeholder=" ">
             <label for="inputText">Password</label>
-            <input type="password" id="user_pw" name="user_pw">
             <span class="invalid-feedback"></span>
         </div>
         <div class="button-group">
-          <button type="submit" class="btn-login">Login</button>
-          <button type="button" class="btn-signup" id="signupButton">Signup</button>
+          <button type="submit" class="btn-login">로그인</button>
+          <button type="button" class="btn-signup" id="signupButton">회원가입</button>
       </div>
     </form>
 </div>
@@ -100,6 +90,18 @@
         }
       });
     }); 
+  </script>
+
+  <script>
+      $(document).ready(function () {
+    $('input').on('input', function () {
+      if ($(this).val()) {
+        $(this).next('label').addClass('input-filled');
+      } else {
+        $(this).next('label').removeClass('input-filled');
+      }
+    });
+  });
   </script>
   
 </body>
