@@ -1,0 +1,176 @@
+:root {
+  --background: linear-gradient(135deg, #FFDAB9, #E1BBF5); /* 전체 배경색 */
+  --accent-color: #FFB6B9; /* 강조 색상 */
+  --text-color: #444; /* 텍스트 색상 */
+  --icon-size: 2.5rem; /* 아이콘 크기 */
+  --font-size: 1.2rem; /* 텍스트 크기 */
+  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 */
+  --active-color: #FFB6B9; /* 활성화 시 색상 */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--background);
+  display: flex;
+  flex-direction: column; /* 상단-중앙-하단 구조 */
+  height: 100vh; /* 전체 화면 높이 */
+}
+
+.content {
+  flex: 1; /* 하단 네비게이션 바를 제외한 영역 */
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  padding-bottom: 80px; /* 네비게이션 바와 겹치지 않도록 여백 */
+  max-height: calc(100vh - 80px); /* 화면 높이에서 네비게이션 바의 높이를 제외한 영역 */
+}
+
+.profile-container {
+  width: 90%;
+  max-width: 400px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  padding: 30px 20px;
+  position: relative;
+  overflow: hidden;
+  min-height: 400px; /* 프로필 컨테이너 높이 */
+}
+
+.settings-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  cursor: pointer;
+  font-size: 2.25rem; /* 이모티콘 크기 */
+  color: var(--text-color); /* 이모티콘 색상 */
+}
+
+.settings-icon img {
+  width: 24px;
+  height: 24px;
+}
+
+.dog-photo {
+  width: 140px; /* 사진 크기 */
+  height: 140px;
+  background: #eaeaea;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  float: left;
+  margin-right: 20px;
+  object-fit: cover;
+}
+
+.dog-info p {
+  margin: 15px 0; /* 텍스트 간 여백 */
+  color: var(--text-color);
+  font-size: 1.4rem;
+}
+
+.health-info {
+  clear: both;
+  margin-top: 40px; /* 상단 여백 */
+  padding-top: 20px;
+  border-top: 1px solid #ddd; /* 구분선 */
+}
+
+.health-info p {
+  display: flex;
+  align-items: center;
+  margin: 40px 0; /* 텍스트 간 여백 */
+  color: var(--text-color);
+  font-size: 1.3rem;
+}
+
+.health-info span {
+  margin-right: 10px; /* 아이콘과 텍스트 간격 */
+  font-size: 1.5rem; /* 아이콘 크기 */
+}
+
+.tabbar {
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  padding: 1rem 0;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  position: fixed;
+  bottom: 0; /* 화면 하단에 고정 */
+  width: 100%;
+  z-index: 1000; /* 다른 요소 위에 표시 */
+}
+
+.tabbar ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.tabbar li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80px; /* 버튼 너비 */
+  height: 100px; /* 버튼 높이 */
+  color: var(--text-color);
+  font-size: var(--font-size);
+  cursor: pointer;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.tabbar li.active {
+  color: var(--accent-color);
+  transform: scale(1.1); /* 활성화 시 확대 */
+}
+
+.tab-style4 li {
+  position: relative;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.tab-style4 li span {
+  font-size: var(--icon-size); /* 아이콘 크기 */
+  margin-bottom: 0.5rem; /* 아이콘과 텍스트 간격 */
+}
+
+.tab-style4 li:after {
+  content: attr(data-label); /* 버튼 설명 */
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 4px;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.tab-style4 li.active:after {
+  opacity: 1;
+  transform: translateY(-5px); /* 텍스트가 위로 올라감 */
+  color: var(--accent-color);
+}
+
+
+#map { height: 50vh;  }
+
+
+#info {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: #f9f9f9;
+}

@@ -1,9 +1,8 @@
 const model = require('../model/mainModel');
 const common = require('../common/common');
 
-let espDatatmp;
 
-const home = (async(req, res) => {
+const gpsView = async(req, res) => {
     try {
         let loginUserInfo = common.checkLogin(req, res); 
         if (loginUserInfo != null) {
@@ -13,28 +12,15 @@ const home = (async(req, res) => {
             console.log('나이: ', viewData.dog_age);
             console.log('종: ', viewData.dog_breed);
 
-            
-            viewData.vibration = espDatatmp.vibration;
-            viewData.heartRate = espDatatmp.heartRate;
-             
-
-            res.render('index', {viewData});   // index.html
+            //res.render('gps/gpsView', {viewData}); 
+            res.render('gps/gpsView', { viewData : JSON.stringify(viewData)});
         }
         
     } catch (error) {
         res.status(500).send('500 Error: ' + error);
     }
-});
-
-
-const espData = (req, res) => {
-    const data = req.body;
-    espDatatmp = data;
-    console.log('Received data:', data);
 };
 
-
 module.exports = {
-    home,
-    espData
+    gpsView
 };
