@@ -1,9 +1,77 @@
-https://github.com/mikalhart/TinyGPS
+//우노보드 연결시
 
-gps 라이브러리
+#include <TinyGPS++.h>
 
-아두이노 스케치 -> 라이브러리 포함하기 -> zip 라이브러리 추가하기
+// GPS 모듈의 RX, TX 핀 정의
+#define RX_PIN 0    // 아두이노의 RX 핀 (GPS의 TX에 연결)
+#define TX_PIN 1    // 아두이노의 TX 핀 (GPS의 RX에 연결)
 
-추가 하셨으면 툴->라이브러리 관리 
+#define GPS_BAUD 9600
 
-눌러서 업데이트 진행
+// 하드웨어 시리얼 객체 생성 (아두이노의 하드웨어 시리얼 포트)
+TinyGPSPlus gps;
+
+void setup() {
+  // 시리얼 모니터 시작 (디버깅용)
+  Serial.begin(115200);       // 시리얼 모니터용 시리얼 시작
+  Serial.begin(GPS_BAUD);     // GPS와의 하드웨어 시리얼 통신 시작 (TX, RX)
+
+  Serial.println("GPS 데이터 읽기 시작");
+}
+
+void loop() {
+  // GPS 데이터를 읽고, 위치 정보가 업데이트되면 출력
+  while (Serial.available() > 0) {
+    gps.encode(Serial.read());  // GPS 데이터 파싱
+
+    // GPS 위치가 업데이트되면 위도와 경도 출력
+    if (gps.location.isUpdated()) {
+      Serial.print("Latitude: ");
+      Serial.print(gps.location.lat(), 6);  // 위도 출력
+      Serial.print("  Longitude: ");
+      Serial.println(gps.location.lng(), 6); // 경도 출력
+    }
+  }
+
+  delay(1000);  // 1초 대기
+}
+
+
+
+
+//esp32 연결시
+//https://randomnerdtutorials.com/esp32-neo-6m-gps-module-arduino/ 참고자료
+/*********
+  Rui Santos & Sara Santos - Random Nerd Tutorials
+  Complete instructions at https://RandomNerdTutorials.com/esp32-neo-6m-gps-module-arduino/
+  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files.
+  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+*********/
+
+ // Define the RX and TX pins for Serial 2
+#define RXD2 16
+#define TXD2 17
+
+#define GPS_BAUD 9600
+
+// Create an instance of the HardwareSerial class for Serial 2
+HardwareSerial gpsSerial(2);
+
+void setup(){
+  // Serial Monitor
+  Serial.begin(115200);
+  
+  // Start Serial 2 with the defined RX and TX pins and a baud rate of 9600
+  gpsSerial.begin(GPS_BAUD, SERIAL_8N1, RXD2, TXD2);
+  Serial.println("Serial 2 started at 9600 baud rate");
+}
+
+void loop(){
+  while (gpsSerial.available() > 0){
+    // get the byte data from the GPS
+    char gpsData = gpsSerial.read();
+    Serial.print(gpsData);
+  }
+  delay(1000);
+  Serial.println("-------------------------------");
+}
