@@ -25,10 +25,7 @@ const home = (async(req, res) => {
             } else {
                 console.log('Data insertion failed');
             }
-<<<<<<< HEAD
                 */
-=======
->>>>>>> origin/main
 
             res.render('index', {viewData});   // index.html
         }

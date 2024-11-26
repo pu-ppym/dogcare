@@ -22,9 +22,13 @@
   <div id="info">지도에서 약국을 터치해주세요.</div>
   
   <script>
+    
     const nearestPharmacies = JSON.parse('{{ nearestPharmacies | safe }}');
+    const currentLat = JSON.parse('{{ currentLat | safe }}');
+    const currentLng = JSON.parse('{{ currentLng | safe }}');
+    
     console.log('view: ', nearestPharmacies);
-    var map = L.map('map').setView([37.5434, 126.722], 15); // 기본 위치 설정
+    var map = L.map('map').setView([currentLat, currentLng], 15); // 기본 위치 설정  //
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

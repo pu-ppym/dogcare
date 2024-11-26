@@ -1,6 +1,11 @@
 const fs = require('fs');
 const csv = require('csv-parser');
 
+let lat = 0.0;
+let lng = 0.0;
+
+
+
 
 // csv
 const loadPharmacyData = () => {
@@ -55,9 +60,11 @@ const view = async (req, res) => {
         
         const leafletData = await loadPharmacyData();
 
-         // 현재 위치 임시
-        const currentLat = 37.5434;  // 37.5434, 126.722 교대  // 학교 37.5491, 126.7234
-        const currentLng = 126.722;
+        const currentLat = lat || 37.5434;  // 37.5434, 126.722 교대  // 학교 37.5491, 126.7234
+        const currentLng = lng || 126.7234;
+
+        console.log('ㅋㅋ찐최종lat: ',currentLat);
+
 
         // 거리 계산 후, 가까운 순으로 정렬
         const sortedPharmacies = leafletData.map(pharmacy => ({
@@ -69,17 +76,35 @@ const view = async (req, res) => {
         const nearestPharmacies = sortedPharmacies.slice(0, 5);
 
         console.log('테스트: ', nearestPharmacies);
-        //console.log('csv_view_테스트: ', leafletData[0]);
-        //console.log('넘겨주기전 테스트: ', JSON.stringify(nearestPharmacies));
-        //res.render('pharmacy/view', JSON.stringify(nearestPharmacies) );
-        /////res.render('pharmacy/view', { nearestPharmacies });
-        res.render('pharmacy/view', {nearestPharmacies: JSON.stringify(nearestPharmacies) });
+
+        res.render('pharmacy/view', {nearestPharmacies: JSON.stringify(nearestPharmacies),
+          currentLat : JSON.stringify(currentLat) , currentLng : JSON.stringify(currentLng)
+         });
 
     } catch (error) {
         res.status(500).send('500 Error: ' + error);
     }
 };
 
+const getLocation = (req, res) => {
+  const { latitude, longitude } = req.body;
+  console.log('넘어온 lat:',latitude );
+  console.log('넘어온 lng:',longitude );
+
+  lat = latitude;
+  lng = longitude;
+
+
+  //res.redirect('/pharmacy/view');
+
+}
+
+const shareData = (req, res) => {
+  return {lat, lng};
+}
+
 module.exports = {
-    view
+    view,
+    getLocation,
+    shareData
 };

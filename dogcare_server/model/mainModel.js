@@ -7,12 +7,8 @@ const normalizePath = (filePath) => {
 
 const getData = async(pkid) => {   // 선택한 강아지만
     try {
-<<<<<<< HEAD
         //const sql = "select o.user_id, o.user_pw, d.dog_name, d.dog_age, d.dog_gender, d.dog_breed, d.dog_image, d.pkid from dogs as d inner join owners as o on d.fkowners = o.pkid where o.pkid = ?";
         const sql = "select o.user_id, o.user_pw, d.dog_name, d.dog_age, d.dog_gender, d.dog_breed, d.dog_image, d.pkid from dogs as d inner join owners as o on d.pkid = o.selected_dog where o.pkid = ?";
-=======
-        const sql = "select o.user_id, o.user_pw, d.dog_name, d.dog_age, d.dog_gender, d.dog_breed, d.dog_image, d.pkid from dogs as d inner join owners as o on d.fkowners = o.pkid where o.pkid = ?";
->>>>>>> origin/main
         const param = [pkid];
 
         const result = await db.runSql(sql, param);
@@ -35,7 +31,6 @@ const getData = async(pkid) => {   // 선택한 강아지만
     }
 }
 
-<<<<<<< HEAD
 const getDogData = async(pkid) => {   // 강아지 전부
     try {
         const sql = "select o.user_id, o.user_pw, d.dog_name, d.dog_age, d.dog_gender, d.dog_breed, d.dog_image, d.pkid from dogs as d inner join owners as o on d.fkowners = o.pkid where o.pkid = ?";
@@ -78,8 +73,6 @@ const updateProfile = async(dog_pkid, user_pkid) => {
 
 
 
-=======
->>>>>>> origin/main
 const insertData = async(fkdogs, heartRate, temperature, vibration) => {
     try {
         const sql = "insert into health_data (fkdogs, heart_rate, temperature, steps) values (?, ?, ?, ?);";
@@ -95,7 +88,6 @@ const insertData = async(fkdogs, heartRate, temperature, vibration) => {
     }
 }
 
-<<<<<<< HEAD
 const updateDogData = async(fkwoners, dog_name, dog_age, dog_gender, dog_breed, dog_image, dogName) => {
     try {
         const sql = "update dogs SET dog_name = ?, dog_age = ?, dog_gender = ?, dog_breed = ?, dog_image = ? where (fkowners = ?) AND (dog_name = ?);";
@@ -134,9 +126,4 @@ module.exports = {
     updateDogData,
     getDogData,
     updateProfile
-=======
-module.exports = {
-    getData,
-    insertData
->>>>>>> origin/main
 }
