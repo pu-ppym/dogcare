@@ -7,6 +7,12 @@
 반려인들을 위한 시스템으로써 강아지의 현재 상태를 실시간으로 알려준다.
 강아지의 몸에 이상이 생길 시 해결책을 제시하여 제때 치료를 받을 수 있도록 한다.
 
+**사용도구**
+- 👍 SZH-EK023 진동센서
+- 👍 MLX90614ESF 비접촉온도센서
+- 👍 SZH-HWS001 심박센서
+- 👍 NEO-6M GPS센서
+
 Skills: JavaScript / C++ / HTML / CSS
 
 - 🔭 I’m currently working on Kiwu 
