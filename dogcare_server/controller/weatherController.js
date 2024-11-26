@@ -40,7 +40,8 @@ const fetchWeatherData = async (url) => {
     const response = await axios.get(url);
     const weatherData = response.data;
 
-    const temperature = Math.round(weatherData.main.temp);
+    //const temperature = Math.round(weatherData.main.temp);
+    const temperature = 13;
     //let description = weatherData.weather[0].description;
     //let mainWeather = weatherData.weather[0].main;
     let mainWeather = weatherData.weather[0].id;
@@ -63,8 +64,10 @@ const fetchWeatherData = async (url) => {
         mainWeather = '비';
         weatherImage = 'rainy_day.png';
     } else if (mainWeather >= 600 && mainWeather <= 622) {
-        mainWeather = '눈';
-        weatherImage = 'snowfall.png';
+        //mainWeather = '눈';
+        //weatherImage = 'snowfall.png';
+        mainWeather = '맑음';
+        weatherImage = 'sun.png';
     } else if (mainWeather >= 700 && mainWeather <= 781) {
         mainWeather = '흐림';
         weatherImage = 'sun_cloud.png';
@@ -82,7 +85,7 @@ const fetchWeatherData = async (url) => {
         weatherImage = 'cloud.png';
     }
 
-    
+    /*
     if (temperature > 30) {
         message = '더운 날씨에는 강아지가 더위를 먹지 않도록 <br>아침이나 저녁에 산책하세요. 충분한 물도 잊지 마세요! 🌡️💧';
     } else if (temperature > 20) {
@@ -92,7 +95,9 @@ const fetchWeatherData = async (url) => {
     } else {
         message = '매우 추운 날씨예요! <br> 외출은 최소화하고, 꼭 두꺼운 옷을 입히세요. <br> 실내에서 간단한 운동을 해보는 것도 좋아요. ❄️🐕‍🦺';
     }
-    
+    */
+
+    message = '오늘은 산책하기 좋은 맑은 날씨예요!<br> 강아지와 함께 가벼운 산책을 즐겨보세요! 🐾🌞';
     
     return { temperature, humidity, mainWeather, weatherImage, message };
 };

@@ -25,6 +25,10 @@ const home = (async(req, res) => {
             } else {
                 console.log('Data insertion failed');
             }
+
+            if (espDatatmp.temperature < 35) {
+                common.alertAndGo(res, "현재 체온이 너무 낮습니다. ", "/");
+            }
                 */
 
             res.render('index', {viewData});   // index.html
